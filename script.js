@@ -52,9 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.appendChild(listItem);
 
     // Clear the task input field
-    if (!taskText) {
-      taskInput.value = "";
-    }
+    taskInput.value = "";
 
     // Save to Local Storage if save is true
     if (save) {
