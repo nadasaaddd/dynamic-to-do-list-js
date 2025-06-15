@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load tasks from Local Storage
   loadTasks();
 
-  // Add event listener to the "Add Task" button
+  // Attach event listener to the "Add Task" button
   addButton.addEventListener("click", addTask);
 
-  // Add event listener to the input field for "Enter" key
-  taskInput.addEventListener("keypress", (event) => {
+  // Attach event listener to the input field for "Enter" key
+  taskInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
       addTask();
     }
@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to add a new task
   function addTask(taskText = null, save = true) {
-    // Use provided taskText (from Local Storage) or get from input and trim
+    // Get and trim the task text from input or provided argument
     const text = taskText || taskInput.value.trim();
 
-    // Check if the task text is empty
+    // Check if task text is empty
     if (text === "") {
       alert("Please enter a task.");
       return;
@@ -33,27 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const listItem = document.createElement("li");
     listItem.textContent = text;
 
-    // Create a "Remove" button
+    // Create a new button for removing the task
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.className = "remove-btn";
 
-    // Add click event listener to remove the task
-    removeButton.addEventListener("click", () => {
-      // Remove the <li> from the task list
+    // Assign onclick event to remove the <li> from taskList
+    removeButton.onclick = function () {
       taskList.removeChild(listItem);
-
       // Update Local Storage after removal
       updateLocalStorage();
-    });
+    };
 
-    // Append the remove button to the <li>
+    // Append the remove button to the <li> element
     listItem.appendChild(removeButton);
 
-    // Append the <li> to the task list
+    // Append the <li> to the taskList
     taskList.appendChild(listItem);
 
-    // Clear the input field if adding via input
+    // Clear the task input field
     if (!taskText) {
       taskInput.value = "";
     }
